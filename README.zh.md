@@ -17,46 +17,60 @@
 
 <br />
 <div align="center">
-    <a href="{{PROJECT_REPO_URL}}">
+    <a href="https://github.com/PlayForDreamDevelopers/CameraSample-Unity">
         <img src="https://www.pfdm.cn/en/static/img/logo.2b1b07e.png" alt="Logo" width="20%">
     </a>
-    <h1 align="center">设备 Unity 示例</h1>
+    <h1 align="center"> CameraSample-Unity </h1>
     <p align="center">
-        {{BriefDescription}}
+        示例展示如何获取 Play For Dream MR 设备的硬件相机信息。
         <br />
-        <a href="{{DocumentationURL}}"><strong>查看文档 »</strong></a>
-        <br />
-        <br />
-        <a href="{{SampleURL}}">查看示例</a>
+        <a href="#samples">查看示例</a>
         &middot;
-        <a href="{{BugIssueURL}}">报告错误</a>
+        <a href="https://github.com/PlayForDreamDevelopers/CameraSample-Unity/issues/new?template=bug_report.yml">报告错误</a>
         &middot;
-        <a href="{{FeatureIssueURL}}">请求功能</a>
+        <a href="https://github.com/PlayForDreamDevelopers/CameraSample-Unity/issues/new?template=feature_request.yml">请求功能</a>
         &middot;
-        <a href="{{DocumentationIssueURL}}">改进文档</a>
+        <a href="https://github.com/PlayForDreamDevelopers/CameraSample-Unity/issues/new?template=documentation_update.yml">改进文档</a>
     </p>
 
 </div>
 
-<!-- 如果需要，请在此处添加提示 -->
+> [!tip]
+>
+> 这些示例仅适用于企业设备。更多详情请参考 [企业服务](https://www.pfdm.cn/yvrdoc/biz/docs/0.Overview.html)
 
 ## 关于项目
 
-<!-- 项目描述
-    这个项目的功能是什么，它的用途是什么，等等。
-
-    对于示例项目，请在此处描述每个示例并附上截图或GIF。
-    对于包项目，请描述包的功能，并链接到示例项目。
-
-    -->
+这个项目提供了几个示例，展示如何获取 Play For Dream MR 设备的硬件相机信息。
 
 ### 示例
 
-<!-- 链接到第一个示例项目 -->
-<!-- 链接到第二个示例项目 -->
+### 追踪相机
+
+![2025 03 18_103505244](https://github.com/user-attachments/assets/72805eef-d2f9-4248-a9e7-fe6d84149002)
+
+此示例展示了如何获取 Play For Dream MR 设备的追踪相机信息，包括：
+
+-   Tracking Master
+-   Tracking Slave
+-   Tracking Aux
+-   Eye Tracking
+
+    <img src="https://github.com/user-attachments/assets/e38e2a7f-3962-4fd7-8dac-c7b6c7f9d723" alt="Camera" width="80%">
+
+    <img src="https://github.com/user-attachments/assets/121d0d30-8232-4a90-8170-f7af3832aa6c" alt="Camera" width="80%">
+
+在此示例中，要获取跟踪相机信息，首先需要在 `Camera Control` 面板左上角的下拉列表中选择目标相机类型，然后点击 `Open Tracking Camera` 按钮打开所选相机，然后可以使用 `Acquiring Camera Frame` 获取静态相机帧，使用 `Subscribe Camera Data` 获取相机流。
+
+-   所有相机数据均为 `Y8` 格式。
 
 ## 要求
 
-<!-- 项目要求：
-    Unity版本，依赖的 Unity Package 等，如果 Unity Package 有 Mirror 仓库的话，需要链接到该仓库的地址。
--->
+-   Unity 2022 3.58f1 或更高版本
+-   [YVR Core](https://github.com/PlayForDreamDevelopers/com.yvr.core-mirror)
+-   [YVR Utilities](https://github.com/PlayForDreamDevelopers/com.yvr.Utilities-mirror)
+-   [YVR Enterprise](https://github.com/PlayForDreamDevelopers/com.yvr.enterprise-mirror)
+-   [YVR Android-Device Core](https://github.com/PlayForDreamDevelopers/com.yvr.android-device.core-mirror)
+-   [YVR Interaction](https://github.com/PlayForDreamDevelopers/com.yvr.interaction-mirror)
+-   Play For Dream MR 设备
+-   Play For Dream OS ENT 3.1.1 或更高版本
