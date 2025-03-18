@@ -56,7 +56,7 @@
 -   Tracking Aux
 -   Eye Tracking
 
-    <img src="https://github.com/user-attachments/assets/e38e2a7f-3962-4fd7-8dac-c7b6c7f9d723" alt="Camera" width="80%">
+    <img src="https://github.com/user-attachments/assets/2bcabde9-368c-4c89-a5b8-ee7c85d79bf4" alt="Camera" width="80%">
 
     <img src="https://github.com/user-attachments/assets/121d0d30-8232-4a90-8170-f7af3832aa6c" alt="Camera" width="80%">
 
