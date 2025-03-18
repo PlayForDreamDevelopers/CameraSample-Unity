@@ -275,6 +275,13 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.yvr.android-device.core": {
+      "version": "git@github.com:PlayForDreamDevelopers/com.yvr.android-device.core-mirror.git?path=/com.yvr.android-device.core#version_1.21.2",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "b9e115408a73fdf1b8b5a5d2ca4f377f481b793c"
+    },
     "com.yvr.core": {
       "version": "git@github.com:PlayForDreamDevelopers/com.yvr.core-mirror.git?path=/com.yvr.core#version_1.23.10",
       "depth": 0,
@@ -284,6 +291,13 @@
         "com.unity.xr.management": "3.0.4"
       },
       "hash": "2fecfc082f712cba95f6c423700cbda3a13d2670"
+    },
+    "com.yvr.enterprise": {
+      "version": "git@github.com:PlayForDreamDevelopers/com.yvr.enterprise-mirror.git?path=/com.yvr.enterprise#version_0.0.9",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "849e183d9084d9132de4e17059ab133c7a290955"
     },
     "com.yvr.interaction": {
       "version": "git@github.com:PlayForDreamDevelopers/com.yvr.interaction-mirror.git?path=/com.yvr.interaction#version_0.6.28",
