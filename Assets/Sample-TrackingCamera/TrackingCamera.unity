@@ -928,8 +928,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1792029759}
-        m_TargetAssemblyTypeName: TestTrackingCamera, Assembly-CSharp
+      - m_Target: {fileID: 2035982380}
+        m_TargetAssemblyTypeName: YVR.Enterprise.Camera.Samples.TrackingCameraControl,
+          Assembly-CSharp
         m_MethodName: AcquireTrackingCameraFrame
         m_Mode: 1
         m_Arguments:
@@ -2735,8 +2736,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1792029759}
-        m_TargetAssemblyTypeName: YVR.Enterprise.Camera.Samples.TestTrackingCamera,
+      - m_Target: {fileID: 2035982380}
+        m_TargetAssemblyTypeName: YVR.Enterprise.Camera.Samples.TrackingCameraControl,
           Assembly-CSharp
         m_MethodName: UnsubscribeTrackingCameraFrame
         m_Mode: 1
@@ -3010,53 +3011,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1728745376}
   m_CullTransparentMesh: 1
---- !u!1 &1792029756
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1792029758}
-  - component: {fileID: 1792029759}
-  m_Layer: 0
-  m_Name: Tracking Camera Control
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1792029758
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1792029756}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.5, z: 3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1792029759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1792029756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f740e4926557d49b472fab95e809e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_CameraImageCollection: {fileID: 984855907}
-  m_CameraImagePrefab: {fileID: 2265682294697595974, guid: 03ffb5ea213fbf044b10c0760eb213b4, type: 3}
-  m_CameraTypeDropdown: {fileID: 352855365}
 --- !u!1 &1874175227
 GameObject:
   m_ObjectHideFlags: 0
@@ -3140,8 +3094,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1792029759}
-        m_TargetAssemblyTypeName: TestTrackingCamera, Assembly-CSharp
+      - m_Target: {fileID: 2035982380}
+        m_TargetAssemblyTypeName: YVR.Enterprise.Camera.Samples.TrackingCameraControl,
+          Assembly-CSharp
         m_MethodName: CloseTrackingCamera
         m_Mode: 1
         m_Arguments:
@@ -3273,8 +3228,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1792029759}
-        m_TargetAssemblyTypeName: TestTrackingCamera, Assembly-CSharp
+      - m_Target: {fileID: 2035982380}
+        m_TargetAssemblyTypeName: YVR.Enterprise.Camera.Samples.TrackingCameraControl,
+          Assembly-CSharp
         m_MethodName: OpenTrackingCamera
         m_Mode: 1
         m_Arguments:
@@ -3870,8 +3826,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1792029759}
-        m_TargetAssemblyTypeName: TestTrackingCamera, Assembly-CSharp
+      - m_Target: {fileID: 2035982380}
+        m_TargetAssemblyTypeName: YVR.Enterprise.Camera.Samples.TrackingCameraControl,
+          Assembly-CSharp
         m_MethodName: SubscribeTrackingCameraFrame
         m_Mode: 1
         m_Arguments:
@@ -13717,5 +13674,4 @@ SceneRoots:
   - {fileID: 3698099624186967268}
   - {fileID: 2035982378}
   - {fileID: 940417688}
-  - {fileID: 1792029758}
   - {fileID: 4121592478116306819}
