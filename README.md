@@ -50,6 +50,10 @@ This projects provide several samples to demonstrate how to get hardware camera 
 
 ### Samples
 
+> [!tip]
+>
+> The image data displayed in the examples is rendered directly from the byte[] data of the image without any processing. Therefore, there may be issues with incorrect or inverted image orientation. If your project requires rendering camera data, please handle it according to your specific needs.
+
 ### Tracking Camera
 
 ![2025 03 18_103505244](https://github.com/user-attachments/assets/72805eef-d2f9-4248-a9e7-fe6d84149002)

@@ -49,6 +49,10 @@
 
 ### 示例
 
+> [!tip]
+>
+> 示例中的展示的图像数据，都是直接对图像的 byte[] 数据进行渲染，不会进行任何处理。因此会有画面角度不正确/颠倒的问题，如果你的项目中需要使用到相机数据进行渲染，请根据实际需求进行处理。
+
 ### 追踪相机
 
 ![2025 03 18_103505244](https://github.com/user-attachments/assets/72805eef-d2f9-4248-a9e7-fe6d84149002)
@@ -59,7 +63,6 @@
 -   Tracking Slave
 -   Tracking Aux
 -   Eye Tracking
-
 
 在此示例中，要获取跟踪相机信息，首先需要在 `Camera Control` 面板左上角的下拉列表中选择目标相机类型，然后点击 `Open Tracking Camera` 按钮打开所选相机，然后可以使用 `Acquiring Camera Frame` 获取静态相机帧，使用 `Subscribe Camera Data` 获取相机流。
 
