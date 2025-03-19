@@ -43,6 +43,10 @@
 
 这个项目提供了几个示例，展示如何获取 Play For Dream MR 设备的硬件相机信息。
 
+<img src="https://github.com/user-attachments/assets/2bcabde9-368c-4c89-a5b8-ee7c85d79bf4" alt="Camera" width="80%">
+
+<img src="https://github.com/user-attachments/assets/121d0d30-8232-4a90-8170-f7af3832aa6c" alt="Camera" width="80%">
+
 ### 示例
 
 ### 追踪相机
@@ -56,13 +60,21 @@
 -   Tracking Aux
 -   Eye Tracking
 
-    <img src="https://github.com/user-attachments/assets/2bcabde9-368c-4c89-a5b8-ee7c85d79bf4" alt="Camera" width="80%">
-
-    <img src="https://github.com/user-attachments/assets/121d0d30-8232-4a90-8170-f7af3832aa6c" alt="Camera" width="80%">
 
 在此示例中，要获取跟踪相机信息，首先需要在 `Camera Control` 面板左上角的下拉列表中选择目标相机类型，然后点击 `Open Tracking Camera` 按钮打开所选相机，然后可以使用 `Acquiring Camera Frame` 获取静态相机帧，使用 `Subscribe Camera Data` 获取相机流。
 
 -   所有相机数据均为 `Y8` 格式。
+
+### VST Camera
+
+![2025 03 18_231239385](https://github.com/user-attachments/assets/bc46b8da-e86a-43df-9f51-b7d3a8fff6da)
+
+此示例展示了如何获取 Play For Dream MR 设备的 VST 相机信息。
+
+在此示例中，要获取 VST 相机帧，首先需要点击 `Open VST Camera` 按钮打开相机，然后可以使用 `Acquiring Camera Frame` 获取静态相机帧。
+
+-   VST 相机数据为 `NV21` 格式
+-   目前，VST 相机不支持获取相机流
 
 ## 要求
 
