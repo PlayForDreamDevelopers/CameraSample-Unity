@@ -44,7 +44,15 @@ Replace the following placeholders with the actual values:
 
 This projects provide several samples to demonstrate how to get hardware camera information of the Play For Dream MR Devices.
 
+<img src="https://github.com/user-attachments/assets/2bcabde9-368c-4c89-a5b8-ee7c85d79bf4" alt="Camera" width="80%">
+
+<img src="https://github.com/user-attachments/assets/121d0d30-8232-4a90-8170-f7af3832aa6c" alt="Camera" width="80%">
+
 ### Samples
+
+> [!tip]
+>
+> The image data displayed in the examples is rendered directly from the byte[] data of the image without any processing. Therefore, there may be issues with incorrect or inverted image orientation. If your project requires rendering camera data, please handle it according to your specific needs.
 
 ### Tracking Camera
 
@@ -57,14 +65,28 @@ This sample demonstrates how to get the tracking camera information of the Play 
 -   Tracking Aux
 -   Eye Tracking
 
+<<<<<<< HEAD
     <img src="https://github.com/user-attachments/assets/b36a2b5d-9fbf-4a96-88bd-6ddf467db5af" alt="Camera" width="80%">
 
     <img src="https://github.com/user-attachments/assets/04df5b8f-90b8-424c-9d5f-b6ac7f70d97c" alt="Camera" width="80%">
 
 
+=======
+>>>>>>> f8a6c2efbcb21b32b30103c06010636854fcf219
 In this sample, for getting the tracking camera information, you need first select the target camera type via dropdown list in the upper-left corner of the `Camera Control` panel, then click the `Open Tracking Camera` button to open the selected camera, and then you can use `Acquiring Camera Frame` to get static camera frame and `Subscribe Camera Data` to get camera stream.
 
 -   All camera data is in `Y8` format.
+
+### VST Camera
+
+![2025 03 18_231239385](https://github.com/user-attachments/assets/bc46b8da-e86a-43df-9f51-b7d3a8fff6da)
+
+This sample demonstrates how to get the VST camera information of the Play For Dream MR Devices.
+
+In this sample, for getting the vst camera frame, you need first click the `Open VST Camera` button to open the camera, then you can use `Acquiring Camera Frame` to get static camera frame.
+
+-   VST Camera data is in `NV21` format
+-   For now, the vst camera dose not support get camera stream.
 
 ## Requirements
 
