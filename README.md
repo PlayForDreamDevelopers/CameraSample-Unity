@@ -57,9 +57,9 @@ This sample demonstrates how to get the tracking camera information of the Play 
 -   Tracking Aux
 -   Eye Tracking
 
-    <img src="https://github.com/user-attachments/assets/2bcabde9-368c-4c89-a5b8-ee7c85d79bf4" alt="Camera" width="80%">
+    <img src="https://github.com/user-attachments/assets/b36a2b5d-9fbf-4a96-88bd-6ddf467db5af" alt="Camera" width="80%">
 
-    <img src="https://github.com/user-attachments/assets/121d0d30-8232-4a90-8170-f7af3832aa6c" alt="Camera" width="80%">
+    <img src="https://github.com/user-attachments/assets/04df5b8f-90b8-424c-9d5f-b6ac7f70d97c" alt="Camera" width="80%">
 
 
 In this sample, for getting the tracking camera information, you need first select the target camera type via dropdown list in the upper-left corner of the `Camera Control` panel, then click the `Open Tracking Camera` button to open the selected camera, and then you can use `Acquiring Camera Frame` to get static camera frame and `Subscribe Camera Data` to get camera stream.

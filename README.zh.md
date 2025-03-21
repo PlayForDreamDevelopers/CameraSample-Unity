@@ -56,9 +56,9 @@
 -   Tracking Aux
 -   Eye Tracking
 
-    <img src="https://github.com/user-attachments/assets/2bcabde9-368c-4c89-a5b8-ee7c85d79bf4" alt="Camera" width="80%">
+    <img src="https://github.com/user-attachments/assets/b36a2b5d-9fbf-4a96-88bd-6ddf467db5af" alt="Camera" width="80%">
 
-    <img src="https://github.com/user-attachments/assets/121d0d30-8232-4a90-8170-f7af3832aa6c" alt="Camera" width="80%">
+    <img src="https://github.com/user-attachments/assets/04df5b8f-90b8-424c-9d5f-b6ac7f70d97c" alt="Camera" width="80%">
 
 在此示例中，要获取跟踪相机信息，首先需要在 `Camera Control` 面板左上角的下拉列表中选择目标相机类型，然后点击 `Open Tracking Camera` 按钮打开所选相机，然后可以使用 `Acquiring Camera Frame` 获取静态相机帧，使用 `Subscribe Camera Data` 获取相机流。
 
