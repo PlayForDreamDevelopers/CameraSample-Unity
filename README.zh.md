@@ -43,10 +43,6 @@
 
 这个项目提供了几个示例，展示如何获取 Play For Dream MR 设备的硬件相机信息。
 
-<img src="https://github.com/user-attachments/assets/b36a2b5d-9fbf-4a96-88bd-6ddf467db5af" alt="Camera" width="80%">
-
-<img src="https://github.com/user-attachments/assets/04df5b8f-90b8-424c-9d5f-b6ac7f70d97c" alt="Camera" width="80%">
-
 ### 示例
 
 > [!tip]
