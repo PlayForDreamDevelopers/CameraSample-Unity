@@ -21,7 +21,7 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
         private Result m_Result;
         private bool m_IsScanning;
         public bool isRecode; 
-
+        Result result = null;
         private void Update()
         {
             if (!QrCodeControlPanel.canScan||isRecode)
@@ -43,19 +43,15 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
 
         private async void StartAsyncScan()
         {
-            Debug.Log("开始扫描");
              
             // 获取VST当前帧
             m_NowVSTCameraFrame = QrCodeControlPanel.gameObject.GetComponent<VSTControl>()
                                                  .AcquireVSTCameraFrame();
-            Debug.Log("获取到VST帧");
             Left.texture = m_NowVSTCameraFrame[0];
             Right.texture = m_NowVSTCameraFrame[1];
-             
-            Debug.Log("获取到将图片显示在调试面板");
+            
             // 扫描解析当前帧
             m_Result = await Task.Run(() => ScanFrames());
-            Debug.Log("解析完成");
             // 更新UI界面
             if (m_Result != null)
             {
@@ -67,14 +63,12 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
             else
             {
                 ScanTip.text = "ScanTips:Scanning...";
-                ScanInfo.text = "ScanInfo:";
-                Debug.Log("未扫描到QR码");
-            }
+                ScanInfo.text = "ScanInfo:"; }
         }
 
         private Result ScanFrames()
         {
-            Result result = null;
+            
             for (int i = 0; i < 2; i++)
             {
                 if (m_NowVSTCameraFrame[i] is Texture2D tex)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ZXing;
 using ZXing.Common;
+using ZXing.QrCode;
 
 namespace YVR.Enterprise.Camera.Samples.QRCode
 {
@@ -196,41 +197,73 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
         System.IO.File.WriteAllBytes(path, bytes); 
         return texture;
     }
- 
     #endregion 
     #region ScanQRCode 
     /*
      使用方法，类似如下：
      Result result = ZXingQRCodeWrapper.ScanQRCode(data, webCamTexture.width, webCamTexture.height);
     */
- 
+    private static LuminanceSource s_MLuminanceSource;
+
+    private static HybridBinarizer s_MBinarizer;
+
+    private static BinaryBitmap s_MBinaryBitmap;
+
+    private static Result s_MResult;
+    
+    private static PlanarYUVLuminanceSource s_MmLuminanceSource;
+
+    private static byte[] luminanceBytes;
+
+    private static Color32[] pixels;
     //二维码识别类
     private static BarcodeReader s_BarcodeReader;//库文件的对象（二维码信息保存的地方）
+    private static QRCodeReader s_QrCodeReader;
  
     /// <summary>
     /// 传入图片识别
     /// </summary>
-    /// <param name="textureData"></param>
+    /// <param name="texture"></param>
     /// <param name="textureDataWidth"></param>
     /// <param name="textureDataHeight"></param>
     /// <returns></returns>
-    public static Result ScanQrCode(Texture2D textureData, int textureDataWidth, int textureDataHeight)
+    public static Result ScanQrCode(Texture2D texture, int textureDataWidth, int textureDataHeight)
     {
-        return ScanQrCode(textureData.GetPixels32(), textureDataWidth, textureDataHeight);
+        s_QrCodeReader ??= new QRCodeReader();
+        s_MLuminanceSource = CreateLuminanceSource(texture);
+        
+        s_MBinarizer = new HybridBinarizer(s_MLuminanceSource);
+        
+        s_MBinaryBitmap = new BinaryBitmap(s_MBinarizer);
+        
+        s_MResult = s_QrCodeReader.decode(s_MBinaryBitmap); 
+        
+        return s_MResult;
     }
- 
-    /// <summary>
-    /// 传入图片像素识别
-    /// </summary>
-    /// <param name="textureData"></param>
-    /// <param name="textureDataWidth"></param>
-    /// <param name="textureDataHeight"></param>
-    /// <returns></returns>
-    public static Result ScanQrCode(Color32[] textureData, int textureDataWidth, int textureDataHeight) {
-        s_BarcodeReader ??= new BarcodeReader();
-        Result result = s_BarcodeReader.Decode(textureData, textureDataWidth, textureDataHeight);
-        return result;
-    } 
+    private static LuminanceSource CreateLuminanceSource(Texture2D texture)
+    {
+        // 获取原始像素数据
+        pixels = texture.GetPixels32();
+        // 转换为亮度数组（灰度信息）
+        luminanceBytes = new byte[pixels.Length];
+        for (int i = 0; i < pixels.Length; i++)
+        {
+            // 使用亮度公式：0.299*R + 0.587*G + 0.114*B
+            luminanceBytes[i] = (byte)(0.299f * pixels[i].r + 0.587f * pixels[i].g + 0.114f * pixels[i].b);
+        }
+
+        // 创建 LuminanceSource（需要指定宽度、高度和原始数据）
+        s_MmLuminanceSource = new PlanarYUVLuminanceSource(
+                                                           luminanceBytes,
+                                                           texture.width,
+                                                           texture.height,
+                                                           0, 0, // 子区域偏移量
+                                                           texture.width,
+                                                           texture.height,
+                                                           false);
+        return s_MmLuminanceSource;
+    }
+
     #endregion
 }
 
