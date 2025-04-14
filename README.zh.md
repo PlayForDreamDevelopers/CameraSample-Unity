@@ -78,6 +78,15 @@
 
 -   VST 相机数据为 `NV21` 格式
 -   目前，VST 相机不支持获取相机流
+   
+
+### QrCode Scan
+
+![2025 04 08_152536064](https://github.com/user-attachments/assets/24c3b682-3840-4da4-8b58-ec7bfad9513a)
+
+此示例展示了如何通过 Play For Dream MR 设备扫描二维码
+
+此示例中，要扫描二维码，要点击 `BeginScanning Scanning Button` 开始扫描，扫描成功会，面板中 `ScanInfo` 会显示扫描信息，`AcquireVSTCameraFrame` 会显示扫描成功时的静态相机帧
 
 ## 要求
 

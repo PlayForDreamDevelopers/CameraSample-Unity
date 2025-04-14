@@ -81,6 +81,14 @@ In this sample, for getting the vst camera frame, you need first click the `Open
 -   VST Camera data is in `NV21` format
 -   For now, the vst camera dose not support get camera stream.
 
+### QrCode Scan
+
+![2025 04 08_152536064](https://github.com/user-attachments/assets/24c3b682-3840-4da4-8b58-ec7bfad9513a)
+
+This sample shows how to scan a QR code with a Play For Dream MR device.
+
+In this example, to scan the QR code, click `BeginScanning Scanning Button` to start scanning. If the scan is successful, `ScanInfo` in the panel will display the scan information, and `AcquireVSTCameraFrame` will display the static camera frame when the scan is successful.
+
 ## Requirements
 
 -   Unity 2022 3.58f1 or later
