@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Sample-TrackingCamera/TrackingCamera.unity
     guid: 5c1953b6660a0d245a5d00bb5b987853
-  - enabled: 1
+  - enabled: 0
     path: Assets/Sample-VSTCamera/VSTCamera.unity
     guid: 54ba820aa0c47df488688b0d4c53753a
   m_configObjects:

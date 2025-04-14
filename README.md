@@ -44,6 +44,10 @@ Replace the following placeholders with the actual values:
 
 This projects provide several samples to demonstrate how to get hardware camera information of the Play For Dream MR Devices.
 
+<img src="https://github.com/user-attachments/assets/b36a2b5d-9fbf-4a96-88bd-6ddf467db5af" alt="Camera" width="80%">
+
+<img src="https://github.com/user-attachments/assets/04df5b8f-90b8-424c-9d5f-b6ac7f70d97c" alt="Camera" width="80%">
+
 ### Samples
 
 > [!tip]
@@ -52,7 +56,7 @@ This projects provide several samples to demonstrate how to get hardware camera 
 
 ### Tracking Camera
 
-![2025 03 18_103505244](https://github.com/user-attachments/assets/72805eef-d2f9-4248-a9e7-fe6d84149002)
+![2025 03 24_111307844](https://github.com/user-attachments/assets/075c4193-0994-4787-ac45-23b37c8b50b6)
 
 This sample demonstrates how to get the tracking camera information of the Play For Dream MR Devices, including：
 
@@ -60,10 +64,6 @@ This sample demonstrates how to get the tracking camera information of the Play 
 -   Tracking Slave
 -   Tracking Aux
 -   Eye Tracking
-
-    <img src="https://github.com/user-attachments/assets/b36a2b5d-9fbf-4a96-88bd-6ddf467db5af" alt="Camera" width="80%">
-
-    <img src="https://github.com/user-attachments/assets/04df5b8f-90b8-424c-9d5f-b6ac7f70d97c" alt="Camera" width="80%">
 
 
 In this sample, for getting the tracking camera information, you need first select the target camera type via dropdown list in the upper-left corner of the `Camera Control` panel, then click the `Open Tracking Camera` button to open the selected camera, and then you can use `Acquiring Camera Frame` to get static camera frame and `Subscribe Camera Data` to get camera stream.

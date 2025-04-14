@@ -43,6 +43,10 @@
 
 这个项目提供了几个示例，展示如何获取 Play For Dream MR 设备的硬件相机信息。
 
+<img src="https://github.com/user-attachments/assets/b36a2b5d-9fbf-4a96-88bd-6ddf467db5af" alt="Camera" width="80%">
+
+<img src="https://github.com/user-attachments/assets/04df5b8f-90b8-424c-9d5f-b6ac7f70d97c" alt="Camera" width="80%">
+
 ### 示例
 
 > [!tip]
@@ -51,7 +55,7 @@
 
 ### 追踪相机
 
-![2025 03 18_103505244](https://github.com/user-attachments/assets/72805eef-d2f9-4248-a9e7-fe6d84149002)
+![2025 03 24_111307844](https://github.com/user-attachments/assets/075c4193-0994-4787-ac45-23b37c8b50b6)
 
 此示例展示了如何获取 Play For Dream MR 设备的追踪相机信息，包括：
 
@@ -60,9 +64,6 @@
 -   Tracking Aux
 -   Eye Tracking
 
-    <img src="https://github.com/user-attachments/assets/b36a2b5d-9fbf-4a96-88bd-6ddf467db5af" alt="Camera" width="80%">
-
-    <img src="https://github.com/user-attachments/assets/04df5b8f-90b8-424c-9d5f-b6ac7f70d97c" alt="Camera" width="80%">
 
 在此示例中，要获取跟踪相机信息，首先需要在 `Camera Control` 面板左上角的下拉列表中选择目标相机类型，然后点击 `Open Tracking Camera` 按钮打开所选相机，然后可以使用 `Acquiring Camera Frame` 获取静态相机帧，使用 `Subscribe Camera Data` 获取相机流。
 
