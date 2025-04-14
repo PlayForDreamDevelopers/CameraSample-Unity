@@ -1,5 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst;
+using Unity.Collections;
+using Unity.Collections.LowLevel.Unsafe;
+using Unity.Jobs;
 using UnityEngine;
 using ZXing;
 using ZXing.Common;
@@ -212,14 +215,25 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
     private static Result s_MResult;
     
     private static PlanarYUVLuminanceSource s_MmLuminanceSource;
-
-    private static byte[] luminanceBytes;
-
-    private static Color32[] pixels;
+    
+    private static NativeArray<Color32> pixels;
+    private static NativeArray<byte> luminanceBytes;
+    
+    [BurstCompile]
+    struct ConvertToBrightnessArray:IJobParallelFor
+    {
+        public NativeArray<Color32> pixels;
+        public NativeArray<byte> luminanceBytes;
+        public void Execute(int index)
+        {
+            // 使用亮度公式：0.299*R + 0.587*G + 0.114*B
+            luminanceBytes[index] = (byte)(0.299f * pixels[index].r + 0.587f * pixels[index].g + 0.114f * pixels[index].b);
+        }
+    }
     //二维码识别类
     private static BarcodeReader s_BarcodeReader;//库文件的对象（二维码信息保存的地方）
     private static QRCodeReader s_QrCodeReader;
- 
+    
     /// <summary>
     /// 传入图片识别
     /// </summary>
@@ -242,26 +256,31 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
     }
     private static LuminanceSource CreateLuminanceSource(Texture2D texture)
     {
-        // 获取原始像素数据
-        pixels = texture.GetPixels32();
-        // 转换为亮度数组（灰度信息）
-        luminanceBytes = new byte[pixels.Length];
-        for (int i = 0; i < pixels.Length; i++)
+        // 获取原始数据
+        var color32Array = texture.GetPixels32();
+    
+        // 分配NativeArray
+        using (var pixels = new NativeArray<Color32>(color32Array, Allocator.TempJob))
+        using (var luminanceBytes = new NativeArray<byte>(color32Array.Length, Allocator.TempJob))
         {
-            // 使用亮度公式：0.299*R + 0.587*G + 0.114*B
-            luminanceBytes[i] = (byte)(0.299f * pixels[i].r + 0.587f * pixels[i].g + 0.114f * pixels[i].b);
-        }
-
-        // 创建 LuminanceSource（需要指定宽度、高度和原始数据）
-        s_MmLuminanceSource = new PlanarYUVLuminanceSource(
-                                                           luminanceBytes,
-                                                           texture.width,
-                                                           texture.height,
-                                                           0, 0, // 子区域偏移量
-                                                           texture.width,
-                                                           texture.height,
-                                                           false);
-        return s_MmLuminanceSource;
+            // 调度Job
+            var job = new ConvertToBrightnessArray
+            {
+                pixels = pixels,
+                luminanceBytes = luminanceBytes
+            };
+            job.Schedule(color32Array.Length, 64).Complete();
+            byte[] managedArray = new byte[luminanceBytes.Length];
+            luminanceBytes.CopyTo(managedArray); // 内存拷贝
+        
+            return new PlanarYUVLuminanceSource(managedArray,
+                                                texture.width,
+                                                texture.height,
+                                                0, 0,
+                                                texture.width,
+                                                texture.height,
+                                                    false);
+        } // 自动释放NativeArray
     }
 
     #endregion

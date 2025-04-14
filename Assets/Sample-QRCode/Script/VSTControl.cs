@@ -9,7 +9,7 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
 {
     public class VSTControl : MonoBehaviour
     {
-        private static ArrayPool<byte> s_ArrayPool;
+        public static ArrayPool<byte> arrayPool;
         
         private Texture[] m_Image = new Texture[2];
         
@@ -21,7 +21,7 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
         private void Awake()
         {
             YVRManager.instance.hmdManager.SetPassthrough(true);
-            s_ArrayPool = ArrayPool<byte>.Shared;
+            arrayPool = ArrayPool<byte>.Shared;
             SetVSTCameraFrequency();
             SetVSTCameraResolution();
             SetVSTCameraFormat();
@@ -51,7 +51,7 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
             for (int i = 0; i < frameData.cameraFrameItem.data.Length; i++)
             {
                 if (frameData.cameraFrameItem.data[i] == IntPtr.Zero) continue;
-                byte[] data = s_ArrayPool.Rent(frameData.cameraFrameItem.dataSize);
+                byte[] data = arrayPool.Rent(frameData.cameraFrameItem.dataSize);
                 Marshal.Copy(frameData.cameraFrameItem.data[i], data, 0, frameData.cameraFrameItem.dataSize);
                 frameBytes[i] = data;
             }
@@ -73,12 +73,11 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
                                                          frameData.cameraFrameItem.height);
                 m_Image[1] = texture2DRight;
             }
+            arrayPool.Return(frameBytes[0]);
+            arrayPool.Return(frameBytes[1]);
             
-            s_ArrayPool.Return(frameBytes[0]);
-            s_ArrayPool.Return(frameBytes[1]);
             return m_Image;
         }
-
         private Texture2D LoadNV21Image(byte[] nv21Data, int width, int height)
         {
             byte[] rgbData = null;
