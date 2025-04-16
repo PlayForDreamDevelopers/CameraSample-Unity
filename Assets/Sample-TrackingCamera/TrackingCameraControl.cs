@@ -107,8 +107,7 @@ namespace YVR.Enterprise.Camera.Samples
             });
         }
 
-        private void LoadY8Image(TrackingCameraType type, bool isLeft, byte[] y8Data, int width, int height,
-                                 Action<Texture> onTextureLoad)
+        private void LoadY8Image(TrackingCameraType type, bool isLeft, byte[] y8Data, int width, int height, System.Action<Texture> onTextureLoad)
         {
             if (!m_TrackingType2TexturesDict.ContainsKey(type))
             {
