@@ -21,7 +21,6 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
                 IsScanning = true;
                 QrCodeInfoDisplayPanel.isRecode = false;
                 ResetPanel(IsScanning);
-                Debug.Log("BeginScanningButton监听成功");
             });
             StopScanningButton.onClick.AddListener(() =>
             {
@@ -29,7 +28,6 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
                 canScan = false;
                 IsScanning = false;
                 ResetPanel(IsScanning);
-                Debug.Log("StopScanningButton监听成功");
             });
         }
         

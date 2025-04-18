@@ -6572,7 +6572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0259dc0adcda4abbbb059c7256ab75e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScanInterval: 0.5
+  ScanInterval: 0.01
   QrCodeControlPanel: {fileID: 104444702}
   Left: {fileID: 1723403565}
   Right: {fileID: 2141914151}

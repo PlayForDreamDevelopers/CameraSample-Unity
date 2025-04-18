@@ -17,6 +17,9 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
         
         private float m_Timer;
         private Texture[] m_NowVSTCameraFrame;
+        private byte[][] m_NowVSTCameraFrameData = new byte[2][];
+        private int[][] m_NowVSTCameraFrameInfo = new int[2][];
+        
         private BarcodeReader m_BarcodeReader;
         private Result m_Result;
         private bool m_IsScanning;
@@ -44,15 +47,14 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
         private async void StartAsyncScan()
         {
              
-            // 获取VST当前帧
+
             m_NowVSTCameraFrame = QrCodeControlPanel.gameObject.GetComponent<VSTControl>()
-                                                 .AcquireVSTCameraFrame();
+                                                 .AcquireVSTCameraFrame(ref m_NowVSTCameraFrameData,ref m_NowVSTCameraFrameInfo);
             Left.texture = m_NowVSTCameraFrame[0];
             Right.texture = m_NowVSTCameraFrame[1];
             
-            // 扫描解析当前帧
             m_Result = await Task.Run(() => ScanFrames());
-            // 更新UI界面
+            
             if (m_Result != null)
             {
                 ScanTip.text = "ScanTips:Scan Successfully";
@@ -68,13 +70,12 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
 
         private Result ScanFrames()
         {
-            
             for (int i = 0; i < 2; i++)
             {
-                if (m_NowVSTCameraFrame[i] is Texture2D tex)
-                {
-                    result = ZXingQrCodeWrapper.ScanQrCode(tex, tex.width, tex.height);
-                }
+                result = ZXingQrCodeWrapper.ScanQrCode(m_NowVSTCameraFrameData[i],m_NowVSTCameraFrameInfo[i][0],m_NowVSTCameraFrameInfo[i][1]);
+                    
+                VSTControl.arrayPoolByte.Return(m_NowVSTCameraFrameData[i]);
+                VSTControl.arrayPoolInt.Return(m_NowVSTCameraFrameInfo[i]);
             }
             return result;
         }
