@@ -129,8 +129,8 @@ namespace YVR.Enterprise.Camera.Samples
             {
                 if (m_LeftImage.texture != null) Destroy(m_LeftImage.texture);
 
-                Texture2D texture2DLeft = LoadNV21Image(frameBytes[0], frameData.cameraFrameItem.width,
-                                                        frameData.cameraFrameItem.height);
+                Texture2D texture2DLeft = ImageConversionLibrary.LoadNV21Image(frameBytes[0], frameData.cameraFrameItem.width,
+                                                                               frameData.cameraFrameItem.height);
                 m_LeftImage.texture = texture2DLeft;
             }
 
@@ -138,61 +138,13 @@ namespace YVR.Enterprise.Camera.Samples
             {
                 if (m_RightImage.texture != null) Destroy(m_RightImage.texture);
 
-                Texture2D texture2DRight = LoadNV21Image(frameBytes[1], frameData.cameraFrameItem.width,
-                                                         frameData.cameraFrameItem.height);
+                Texture2D texture2DRight = ImageConversionLibrary.LoadNV21Image(frameBytes[1], frameData.cameraFrameItem.width,
+                                                                               frameData.cameraFrameItem.height);
                 m_RightImage.texture = texture2DRight;
             }
 
             s_ArrayPool.Return(frameBytes[0]);
             s_ArrayPool.Return(frameBytes[1]);
-        }
-
-        private Texture2D LoadNV21Image(byte[] nv21Data, int width, int height)
-        {
-            byte[] rgbData = null;
-            ConvertNV21ToRGB(ref rgbData, nv21Data, width, height);
-            var texture = new Texture2D(width, height, TextureFormat.RGB24, false);
-            texture.LoadRawTextureData(rgbData);
-            texture.Apply();
-            return texture;
-        }
-
-        private static void ConvertNV21ToRGB(ref byte[] rgbData, byte[] nv21Data, int width, int height)
-        {
-            int frameSize = width * height;
-
-            if (rgbData == null || frameSize != rgbData.Length)
-            {
-                rgbData = new byte[frameSize * 3];
-            }
-
-            for (int y = 0; y < height; y++)
-            {
-                for (int x = 0; x < width; x++)
-                {
-                    int yIndex = y * width + x;
-                    int uvIndex = frameSize + (y / 2) * width + (x & ~1);
-
-                    int yData = nv21Data[yIndex] & 0xff;
-                    int vData = nv21Data[uvIndex] & 0xff;
-                    int uData = nv21Data[uvIndex + 1] & 0xff;
-
-                    yData = yData < 16 ? 16 : yData;
-
-                    int r = (int) (1.164f * (yData - 16) + 1.596f * (vData - 128));
-                    int g = (int) (1.164f * (yData - 16) - 0.813f * (vData - 128) - 0.391f * (uData - 128));
-                    int b = (int) (1.164f * (yData - 16) + 2.018f * (uData - 128));
-
-                    r = r < 0 ? 0 : (r > 255 ? 255 : r);
-                    g = g < 0 ? 0 : (g > 255 ? 255 : g);
-                    b = b < 0 ? 0 : (b > 255 ? 255 : b);
-
-                    int rgbIndex = yIndex * 3;
-                    rgbData[rgbIndex] = (byte) r;
-                    rgbData[rgbIndex + 1] = (byte) g;
-                    rgbData[rgbIndex + 2] = (byte) b;
-                }
-            }
         }
     }
 }

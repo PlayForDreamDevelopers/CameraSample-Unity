@@ -16,20 +16,18 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
         {
             BeginScanningButton.onClick.AddListener(() =>
             {
-                GetComponent<VSTControl>().OpenVSTCamera();
-                canScan = true;
+                GetComponent<VSTCameraControl>().OpenVSTCamera();
                 IsScanning = true;
-                QrCodeInfoDisplayPanel.isRecode = false;
                 ResetPanel(IsScanning);
-                Debug.Log("BeginScanningButton监听成功");
+                canScan = true;
+                QrCodeInfoDisplayPanel.isRecode = false;
             });
             StopScanningButton.onClick.AddListener(() =>
             {
-                GetComponent<VSTControl>().CloseVSTCamera();
-                canScan = false;
+                GetComponent<VSTCameraControl>().CloseVSTCamera();
                 IsScanning = false;
                 ResetPanel(IsScanning);
-                Debug.Log("StopScanningButton监听成功");
+                canScan = false;
             });
         }
         
