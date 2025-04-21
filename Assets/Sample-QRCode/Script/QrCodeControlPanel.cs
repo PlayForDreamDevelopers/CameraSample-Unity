@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,23 +15,26 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
 
         private void Start()
         {
-            BeginScanningButton.onClick.AddListener(() =>
-            {
-                GetComponent<VSTCameraControl>().OpenVSTCamera();
-                IsScanning = true;
-                ResetPanel(IsScanning);
-                canScan = true;
-                QrCodeInfoDisplayPanel.isRecode = false;
-            });
-            StopScanningButton.onClick.AddListener(() =>
-            {
-                GetComponent<VSTCameraControl>().CloseVSTCamera();
-                IsScanning = false;
-                ResetPanel(IsScanning);
-                canScan = false;
-            });
+            BeginScanningButton.onClick.AddListener(StartScanning);
+            StopScanningButton.onClick.AddListener(StopScanning);
         }
-        
+
+        public void StartScanning()
+        {
+            GetComponent<VSTCameraControl>().OpenVSTCamera();
+            IsScanning = true;
+            ResetPanel(IsScanning);
+            canScan = true;
+            QrCodeInfoDisplayPanel.isRecode = false;
+        }
+
+        public void StopScanning()
+        {
+            GetComponent<VSTCameraControl>().CloseVSTCamera();
+            IsScanning = false;
+            ResetPanel(IsScanning);
+            canScan = false;
+        }
         public void ResetPanel(bool isScanning = false)
         {
             QrCodeInfoDisplayPanel.ScanTip.text = "ScanTips:";
