@@ -276,31 +276,31 @@
       "url": "https://packages.unity.com"
     },
     "com.yvr.android-device.core": {
-      "version": "git@github.com:PlayForDreamDevelopers/com.yvr.android-device.core-mirror.git?path=/com.yvr.android-device.core#version_1.21.2",
+      "version": "https://github.com/PlayForDreamDevelopers/com.yvr.android-device.core-mirror.git?path=/com.yvr.android-device.core#version_1.21.2",
       "depth": 0,
       "source": "git",
       "dependencies": {},
       "hash": "b9e115408a73fdf1b8b5a5d2ca4f377f481b793c"
     },
     "com.yvr.core": {
-      "version": "git@github.com:PlayForDreamDevelopers/com.yvr.core-mirror.git?path=/com.yvr.core#version_1.23.10",
+      "version": "https://github.com/PlayForDreamDevelopers/com.yvr.core-mirror.git?path=/com.yvr.core#version_1.26.3",
       "depth": 0,
       "source": "git",
       "dependencies": {
         "com.yvr.utilities": "0.15.10",
         "com.unity.xr.management": "3.0.4"
       },
-      "hash": "2fecfc082f712cba95f6c423700cbda3a13d2670"
+      "hash": "6354dc4faea4f4da59756a4d376f098334c3ae15"
     },
     "com.yvr.enterprise": {
-      "version": "git@github.com:PlayForDreamDevelopers/com.yvr.enterprise-mirror.git?path=/com.yvr.enterprise#version_0.0.9",
+      "version": "https://github.com/PlayForDreamDevelopers/com.yvr.enterprise-mirror.git?path=/com.yvr.enterprise#version_0.0.9",
       "depth": 0,
       "source": "git",
       "dependencies": {},
       "hash": "849e183d9084d9132de4e17059ab133c7a290955"
     },
     "com.yvr.interaction": {
-      "version": "git@github.com:PlayForDreamDevelopers/com.yvr.interaction-mirror.git?path=/com.yvr.interaction#version_0.6.28",
+      "version": "https://github.com/PlayForDreamDevelopers/com.yvr.interaction-mirror.git?path=/com.yvr.interaction#version_0.6.28",
       "depth": 0,
       "source": "git",
       "dependencies": {
@@ -312,13 +312,13 @@
       "hash": "bcecb95c5b3568bbb396bc1aa4f3a2d24d375bad"
     },
     "com.yvr.utilities": {
-      "version": "git@github.com:PlayForDreamDevelopers/com.yvr.utilities-mirror.git?path=/com.yvr.utilities#version_0.15.11",
+      "version": "https://github.com/PlayForDreamDevelopers/com.yvr.utilities-mirror.git?path=/com.yvr.utilities#version_0.15.12",
       "depth": 0,
       "source": "git",
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "3.2.1"
       },
-      "hash": "180296adf51f193bf1bddeac4f2c8ae8ee231e2d"
+      "hash": "7a53095f37af3bb96c8d64af7a7d41711113282e"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",

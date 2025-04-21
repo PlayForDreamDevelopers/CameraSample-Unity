@@ -1,0 +1,4 @@
+577: 32172: onQuerySupportedTrackingOriginModes begin
+577: 32172:  onHandleSetTrackingOriginMode:1
+1215: 32172: onQueryTrackingOriginMode:2
+2068: 32172: onQueryTrackingOriginMode:2
