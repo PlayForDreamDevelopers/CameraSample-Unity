@@ -5,7 +5,6 @@ using System.Runtime.InteropServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using YVR.Core;
 using YVR.Utilities;
 
 namespace YVR.Enterprise.Camera.Samples
@@ -25,10 +24,8 @@ namespace YVR.Enterprise.Camera.Samples
         private Dictionary<TrackingCameraType, GameObject> m_TrackingType2DisplayDict = new();
         private Dictionary<TrackingCameraType, (Texture2D, Texture2D)> m_TrackingType2TexturesDict = new();
 
-
         private void Start()
         {
-            YVRManager.instance.hmdManager.SetPassthrough(true);
             s_ArrayPool = ArrayPool<byte>.Shared;
             m_CameraType = (TrackingCameraType) m_CameraTypeDropdown.value;
             m_CameraTypeDropdown.onValueChanged.AddListener(value => m_CameraType = (TrackingCameraType) value);

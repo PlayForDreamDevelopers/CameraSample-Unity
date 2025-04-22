@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 using ZXing;
 using ZXing.Common;
@@ -9,58 +10,35 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
     public class ZXingQrCodeWrapper : MonoBehaviour
     {
         #region GenerateQRCode
-        public static Texture2D GenerateQrCode(string content, int width, int height,string qrCodeFileName)
-        {
-            EncodingOptions options = null;
-            BarcodeWriter writer = new BarcodeWriter();
-            options = new EncodingOptions
-            {
-                Width = width,
-                Height = height,
-                Margin = 1,
-            };
-            options.Hints.Add(EncodeHintType.CHARACTER_SET, "UTF-8");
-            writer.Format = BarcodeFormat.QR_CODE;
-            writer.Options = options;
-            Color32[] colors = writer.Write(content);
-    
-            Texture2D texture = new Texture2D(width, height);
-            texture.SetPixels32(colors);
-            texture.Apply(); 
-            byte[] bytes = texture.EncodeToPNG();
-            string path = System.IO.Path.Combine(Application.persistentDataPath, qrCodeFileName + ".png");
-            System.IO.File.WriteAllBytes(path, bytes); 
-            return texture;
-        }
 
-        public static Texture2D GenerateQrCode(string content,Color color,string qrCodeFileName)
+        public static Texture2D GenerateQrCode(string content, Color color, string qrCodeFileName)
         {
             return GenerateQrCode(content, 256, 256, color, qrCodeFileName);
         }
-        
-        public static Texture2D GenerateQrCode(string content, int width, int height, Color color,string qrCodeFileName)
+
+        private static Texture2D GenerateQrCode(string content, int width, int height, Color color,
+                                                string qrCodeFileName)
         {
-            BitMatrix bitMatrix;
-            Texture2D texture = GenerateQrCode(content, width, height, color, out bitMatrix,qrCodeFileName); 
+            Texture2D texture = GenerateQrCode(content, width, height, color, out BitMatrix _, qrCodeFileName);
             return texture;
         }
-        
-        public static Texture2D GenerateQrCode(string content, int width, int height, Color color, out BitMatrix bitMatrix,string qrCodeFileName)
+
+        private static Texture2D GenerateQrCode(string content, int width, int height, Color color,
+                                                out BitMatrix bitMatrix, string qrCodeFileName)
         {
-    
             MultiFormatWriter writer = new MultiFormatWriter();
             Dictionary<EncodeHintType, object> hints = new Dictionary<EncodeHintType, object>();
-    
+
             hints.Add(EncodeHintType.CHARACTER_SET, "UTF-8");
-    
+
             hints.Add(EncodeHintType.MARGIN, 1);
             hints.Add(EncodeHintType.ERROR_CORRECTION, ZXing.QrCode.Internal.ErrorCorrectionLevel.M);
-    
+
             bitMatrix = writer.encode(content, BarcodeFormat.QR_CODE, width, height, hints);
-    
-    
+
+
             int w = bitMatrix.Width;
-            int h = bitMatrix.Height; 
+            int h = bitMatrix.Height;
             Texture2D texture = new Texture2D(w, h);
             for (int x = 0; x < h; x++)
             {
@@ -76,33 +54,35 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
                     }
                 }
             }
+
             texture.Apply();
             byte[] bytes = texture.EncodeToPNG();
             string path = System.IO.Path.Combine(Application.persistentDataPath, qrCodeFileName + ".png");
-            System.IO.File.WriteAllBytes(path, bytes); 
+            System.IO.File.WriteAllBytes(path, bytes);
             return texture;
         }
-    
-        public static Texture2D GenerateQrCode(string content, Color color, Texture2D centerIcon ,string qrCodeFileName)
+
+        public static Texture2D GenerateQrCode(string content, Color color, Texture2D centerIcon, string qrCodeFileName)
         {
-            return GenerateQrCode(content, 256, 256, color, centerIcon,qrCodeFileName);
+            return GenerateQrCode(content, 256, 256, color, centerIcon, qrCodeFileName);
         }
-    
-        public static Texture2D GenerateQrCode(string content, int width, int height, Color color, Texture2D centerIcon,string qrCodeFileName)
+
+        public static Texture2D GenerateQrCode(string content, int width, int height, Color color, Texture2D centerIcon,
+                                               string qrCodeFileName)
         {
             BitMatrix bitMatrix;
-            Texture2D texture = GenerateQrCode(content, width, height, color, out bitMatrix,qrCodeFileName);
+            Texture2D texture = GenerateQrCode(content, width, height, color, out bitMatrix, qrCodeFileName);
             int w = bitMatrix.Width;
             int h = bitMatrix.Height;
-            
+
             int halfWidth = texture.width / 2;
             int halfHeight = texture.height / 2;
             int halfWidthOfIcon = centerIcon.width / 2;
             int halfHeightOfIcon = centerIcon.height / 2;
-            
-            int centerOffsetX = 0;
-            int centerOffsetY = 0;
-            
+
+            int centerOffsetX;
+            int centerOffsetY;
+
             for (int x = 0; x < h; x++)
             {
                 for (int y = 0; y < w; y++)
@@ -110,56 +90,61 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
                     centerOffsetX = x - halfWidth;
                     centerOffsetY = y - halfHeight;
                     if (Mathf.Abs(centerOffsetX) <= halfWidthOfIcon && Mathf.Abs(centerOffsetY) <= halfHeightOfIcon)
-                        texture.SetPixel(x, y, centerIcon.GetPixel(centerOffsetX + halfWidthOfIcon, centerOffsetY + halfHeightOfIcon));
+                        texture.SetPixel(x, y, centerIcon.GetPixel(centerOffsetX + halfWidthOfIcon,
+                                                                   centerOffsetY + halfHeightOfIcon));
                 }
             }
-            texture.Apply();    
+
+            texture.Apply();
             byte[] bytes = texture.EncodeToPNG();
             string path = System.IO.Path.Combine(Application.persistentDataPath, qrCodeFileName + ".png");
-            System.IO.File.WriteAllBytes(path, bytes); 
+            System.IO.File.WriteAllBytes(path, bytes);
             return texture;
         }
-        #endregion 
-        #region ScanQRCode 
-    
-        private static LuminanceSource s_MLuminanceSource;
-    
-        private static HybridBinarizer s_MBinarizer;
-    
-        private static BinaryBitmap s_MBinaryBitmap;
-    
-        private static Result s_MResult;
-        
-        private static PlanarYUVLuminanceSource s_MmLuminanceSource;
-    
+
+        #endregion
+
+        #region ScanQRCode
+
         private static QRCodeReader s_QrCodeReader;
-        
-    
+
+
         public static Result ScanQrCode(byte[] texture, int textureDataWidth, int textureDataHeight)
         {
             s_QrCodeReader ??= new QRCodeReader();
-            
-            s_MLuminanceSource = CreateLuminanceSource(texture, textureDataWidth, textureDataHeight);
-            
-            s_MBinarizer = new HybridBinarizer(s_MLuminanceSource);
-            
-            s_MBinaryBitmap = new BinaryBitmap(s_MBinarizer);
-            
-            s_MResult = s_QrCodeReader.decode(s_MBinaryBitmap); 
-            
-            return s_MResult;
+
+            var luminanceSource = CreateLuminanceSource(texture, textureDataWidth, textureDataHeight);
+
+            var binarizer = new HybridBinarizer(luminanceSource);
+
+            var binaryBitmap = new BinaryBitmap(binarizer);
+
+            var result = s_QrCodeReader.decode(binaryBitmap);
+
+            return result;
         }
-        private static LuminanceSource CreateLuminanceSource(byte[] textureData,int textureDataWidth, int textureDataHeight)
+
+        private static LuminanceSource CreateLuminanceSource(byte[] textureData, int textureDataWidth,
+                                                             int textureDataHeight)
         {
-            return new PlanarYUVLuminanceSource(ImageConversionLibrary.ConvertNV21ToYUV420P(textureData,textureDataWidth,textureDataHeight),
-                                                textureDataWidth,
-                                                textureDataHeight,
-                                                0, 0,
-                                                textureDataWidth,
-                                                textureDataHeight,
-                                                false
-                                                );
+            int ySize = textureDataWidth * textureDataHeight;
+            int uvSize = ySize / 4;
+            int totalSize = ySize + uvSize * 2;
+
+            using var nv21Native = new NativeArray<byte>(textureData, Allocator.Persistent);
+            var yuv420PNative = new NativeArray<byte>(totalSize, Allocator.Persistent);
+
+            ImageConversionLibrary.ConvertNV21ToYuv420P(in nv21Native, ref yuv420PNative, textureDataWidth,
+                                                        textureDataHeight);
+
+            byte[] yuv420P = yuv420PNative.ToArray();
+            var ret = new PlanarYUVLuminanceSource(yuv420P, textureDataWidth, textureDataHeight, 0, 0,
+                                                   textureDataWidth, textureDataHeight, false);
+
+            yuv420PNative.Dispose();
+            return ret;
         }
+
         #endregion
     }
 }

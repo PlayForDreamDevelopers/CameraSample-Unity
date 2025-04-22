@@ -2,7 +2,7 @@ using System;
 using System.Buffers;
 using System.Runtime.InteropServices;
 using UnityEngine;
-using YVR.Core;
+
 namespace YVR.Enterprise.Camera.Samples.QRCode
 {
     public class VSTCameraControl : MonoBehaviour
@@ -19,7 +19,6 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
 
         private void Awake()
         {
-            YVRManager.instance.hmdManager.SetPassthrough(true);
             arrayPoolByte = ArrayPool<byte>.Shared;
             arrayPoolInt = ArrayPool<int>.Shared;
             SetVSTCameraFrequency();
@@ -79,8 +78,9 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
             {
                 if (m_Image[0] != null) Destroy(m_Image[0]);
 
-                Texture2D texture2DLeft = ImageConversionLibrary.LoadNV21Image(frameBytes[0], frameData.cameraFrameItem.width,
-                                                                              frameData.cameraFrameItem.height);
+                Texture2D texture2DLeft = ImageConversionLibrary.LoadNV21Image(frameBytes[0],
+                                                                               frameData.cameraFrameItem.width,
+                                                                               frameData.cameraFrameItem.height);
                 m_Image[0] = texture2DLeft;
             }
 
@@ -88,8 +88,9 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
             {
                 if (m_Image[1] != null) Destroy(m_Image[1]);
 
-                Texture2D texture2DRight = ImageConversionLibrary.LoadNV21Image(frameBytes[1], frameData.cameraFrameItem.width,
-                                                                               frameData.cameraFrameItem.height);
+                Texture2D texture2DRight = ImageConversionLibrary.LoadNV21Image(frameBytes[1],
+                                                                                frameData.cameraFrameItem.width,
+                                                                                frameData.cameraFrameItem.height);
                 m_Image[1] = texture2DRight;
             }
 

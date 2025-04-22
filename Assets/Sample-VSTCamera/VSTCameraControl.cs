@@ -4,8 +4,6 @@ using System.Runtime.InteropServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using YVR.Core;
-using ZXing;
 
 namespace YVR.Enterprise.Camera.Samples
 {
@@ -20,8 +18,7 @@ namespace YVR.Enterprise.Camera.Samples
         [SerializeField] private TMP_Dropdown m_FormatDropdown;
         [SerializeField] private TMP_Dropdown m_SourceDropdown;
         [SerializeField] private TextMeshProUGUI m_CameraData;
-        [SerializeField] private TextMeshProUGUI m_ScanInfo;
-        
+
 
         private VSTCameraFrequencyType m_FrequencyType;
         private VSTCameraResolutionType m_ResolutionType;
@@ -30,7 +27,6 @@ namespace YVR.Enterprise.Camera.Samples
 
         private void Start()
         {
-            YVRManager.instance.hmdManager.SetPassthrough(true);
             s_ArrayPool = ArrayPool<byte>.Shared;
 
             m_FrequencyType = (VSTCameraFrequencyType) m_FrequencyDropdown.value;
@@ -101,7 +97,6 @@ namespace YVR.Enterprise.Camera.Samples
 
         private void SetVSTCameraOutputSource()
         {
-            Debug.Log($"sss set source is {m_SourceType}");
             YVRVSTCameraPlugin.SetVSTCameraOutputSource(m_SourceType);
         }
 
@@ -117,6 +112,7 @@ namespace YVR.Enterprise.Camera.Samples
             m_RightImage.texture = null;
             VSTCameraFrameData frameData = default;
             YVRVSTCameraPlugin.AcquireVSTCameraFrame(ref frameData);
+
             for (int i = 0; i < frameData.cameraFrameItem.data.Length; i++)
             {
                 if (frameData.cameraFrameItem.data[i] == IntPtr.Zero) continue;
@@ -129,7 +125,8 @@ namespace YVR.Enterprise.Camera.Samples
             {
                 if (m_LeftImage.texture != null) Destroy(m_LeftImage.texture);
 
-                Texture2D texture2DLeft = ImageConversionLibrary.LoadNV21Image(frameBytes[0], frameData.cameraFrameItem.width,
+                Texture2D texture2DLeft = ImageConversionLibrary.LoadNV21Image(frameBytes[0],
+                                                                               frameData.cameraFrameItem.width,
                                                                                frameData.cameraFrameItem.height);
                 m_LeftImage.texture = texture2DLeft;
             }
@@ -138,8 +135,9 @@ namespace YVR.Enterprise.Camera.Samples
             {
                 if (m_RightImage.texture != null) Destroy(m_RightImage.texture);
 
-                Texture2D texture2DRight = ImageConversionLibrary.LoadNV21Image(frameBytes[1], frameData.cameraFrameItem.width,
-                                                                               frameData.cameraFrameItem.height);
+                Texture2D texture2DRight = ImageConversionLibrary.LoadNV21Image(frameBytes[1],
+                                                                                frameData.cameraFrameItem.width,
+                                                                                frameData.cameraFrameItem.height);
                 m_RightImage.texture = texture2DRight;
             }
 
