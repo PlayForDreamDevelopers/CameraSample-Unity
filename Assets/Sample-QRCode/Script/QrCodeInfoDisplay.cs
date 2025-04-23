@@ -20,21 +20,16 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
         
         private BarcodeReader m_BarcodeReader;
         private Result m_Result;
-        private bool m_IsScanning;
         public bool isRecode;
         private Result m_TmpResult = null;
         private void Update()
         {
             if (!QrCodeControlPanel.canScan||isRecode)
             {
-                if (m_IsScanning)
-                {
-                    m_IsScanning = false;
-                }
-                return;
+                if (QrCodeControlPanel.IsScanning)
+                    QrCodeControlPanel.IsScanning = false;
             }
-
-            if (!m_IsScanning)
+            if (QrCodeControlPanel.IsScanning)
                 StartAsyncScan();
         }
 
@@ -55,11 +50,13 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
                 ScanInfo.text = "ScanInfo:";
                 ScanInfo.text += m_Result.Text;
                 isRecode = true;
+                QrCodeControlPanel.IsScanning = false;
             }
-            else if(m_Result == null && !isRecode && m_IsScanning)
+            else if(m_Result == null && !isRecode && QrCodeControlPanel.IsScanning)
             {
                 ScanTip.text = "ScanTips:Scanning...";
                 ScanInfo.text = "ScanInfo:"; 
+                QrCodeControlPanel.IsScanning = true;
             }
         }
 
