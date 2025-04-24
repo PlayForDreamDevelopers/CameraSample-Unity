@@ -5744,8 +5744,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LeftImage: {fileID: 3454772375535630723}
   m_RightImage: {fileID: 6264339903762008288}
-  m_LeftTexture: {fileID: 0}
-  m_RightTexture: {fileID: 0}
   mapLeftXFile: map_left_x
   mapLeftYFile: map_left_y
   mapRightXFile: map_right_x

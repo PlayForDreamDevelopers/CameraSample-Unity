@@ -14,10 +14,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Sample-VSTCamera/VSTCamera.unity
     guid: 54ba820aa0c47df488688b0d4c53753a
-  - enabled: 0
-    path: Assets/Sample-QRCode/Scene/ScanQRCode.unity
-    guid: 20bdf0af0ce2a6d4c9fb134f6e58da0f
   - enabled: 1
+    path: Assets/Sample-QRCode/Scene/QRCode.unity
+    guid: 20bdf0af0ce2a6d4c9fb134f6e58da0f
+  - enabled: 0
     path: Assets/Sample-VSTUndistortion/VSTDistortion.unity
     guid: 812b4d2a134e09149bcd5e62125d1063
   m_configObjects:

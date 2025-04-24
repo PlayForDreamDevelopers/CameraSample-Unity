@@ -525,8 +525,6 @@ GameObject:
   m_Component:
   - component: {fileID: 104444700}
   - component: {fileID: 104444703}
-  - component: {fileID: 104444705}
-  - component: {fileID: 104444704}
   m_Layer: 5
   m_Name: ScanButtons
   m_TagString: Untagged
@@ -581,35 +579,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &104444704
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 104444699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 935b573dc1e9031458fde7103125cd55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  QrCodeInfoDisplayPanel: {fileID: 1042898000}
-  BeginScanningButton: {fileID: 217728888}
-  StopScanningButton: {fileID: 894991457}
-  canScan: 0
-  IsScanning: 0
---- !u!114 &104444705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 104444699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eca5cc4e46efef4caa9895930b10dd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &106490005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1116,7 +1085,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 217728889}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 532870208}
+        m_TargetAssemblyTypeName: YVR.Enterprise.Camera.Samples.QRCode.QRCodeScanningControl,
+          Assembly-CSharp
+        m_MethodName: OpenVSTCamera
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &217728889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2391,7 +2373,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 21.64}
+  m_SizeDelta: {x: 0, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &374876661
 MonoBehaviour:
@@ -2413,7 +2395,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: AcquireVSTCameraFrame
+  m_text: 'Scaning Camera Preview: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2448,7 +2430,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -3635,8 +3617,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -6.5049973, y: -15.820007}
-  m_SizeDelta: {x: 35.75, y: 31.64}
+  m_AnchoredPosition: {x: -3, y: -25}
+  m_SizeDelta: {x: 35, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &506395207
 MonoBehaviour:
@@ -3682,7 +3664,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 104444704}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: YVR.Enterprise.Camera.Samples.QRCode.QrCodeControlPanel,
           Assembly-CSharp
         m_MethodName: StopScanning
@@ -3695,7 +3677,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 104444705}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: YVR.Enterprise.Camera.Samples.QRCode.VSTCameraControl,
           Assembly-CSharp
         m_MethodName: CloseVSTCamera
@@ -3842,6 +3824,8 @@ GameObject:
   - component: {fileID: 532870204}
   - component: {fileID: 532870203}
   - component: {fileID: 532870202}
+  - component: {fileID: 532870206}
+  - component: {fileID: 532870208}
   m_Layer: 5
   m_Name: QRCode Info Display
   m_TagString: Untagged
@@ -3930,13 +3914,42 @@ RectTransform:
   - {fileID: 2120055905}
   - {fileID: 1042897996}
   - {fileID: 506395206}
-  m_Father: {fileID: 679522785}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -3.73, y: -0.37143993}
+  m_AnchoredPosition: {x: -0.5, y: 1.5}
   m_SizeDelta: {x: 248.1183, y: 396.457}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &532870206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532870201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ce48944fa7f92c41913dc010da3e120, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  left: {fileID: 1723403565}
+  right: {fileID: 2141914151}
+  scanningState: {fileID: 2062382105}
+  scanningResult: {fileID: 912512697}
+--- !u!114 &532870208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532870201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eca5cc4e46efef4caa9895930b10dd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  qrCodeInfoDisplay: {fileID: 532870206}
 --- !u!1 &543071268
 GameObject:
   m_ObjectHideFlags: 0
@@ -4642,38 +4655,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 583304822}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &679522784
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 679522785}
-  m_Layer: 0
-  m_Name: Cavans
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &679522785
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 679522784}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.403, y: 1.36144, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 532870205}
-  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &683277804
 GameObject:
@@ -5434,7 +5415,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 894991458}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 532870208}
+        m_TargetAssemblyTypeName: YVR.Enterprise.Camera.Samples.QRCode.QRCodeScanningControl,
+          Assembly-CSharp
+        m_MethodName: CloseVSTCamera
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &894991458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5547,7 +5541,7 @@ GameObject:
   - component: {fileID: 912512698}
   - component: {fileID: 912512697}
   m_Layer: 5
-  m_Name: Scaninfo
+  m_Name: ScanningResult
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5570,7 +5564,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 47.37}
+  m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &912512697
 MonoBehaviour:
@@ -5592,7 +5586,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'ScanInfo:'
+  m_text: Scanning Result
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6322,7 +6316,6 @@ GameObject:
   - component: {fileID: 1042897999}
   - component: {fileID: 1042897998}
   - component: {fileID: 1042897997}
-  - component: {fileID: 1042898000}
   m_Layer: 5
   m_Name: Scroll View
   m_TagString: Untagged
@@ -6418,24 +6411,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1042897995}
   m_CullTransparentMesh: 1
---- !u!114 &1042898000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1042897995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ce48944fa7f92c41913dc010da3e120, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  QrCodeControlPanel: {fileID: 104444704}
-  Left: {fileID: 1723403565}
-  Right: {fileID: 2141914151}
-  ScanTip: {fileID: 2062382105}
-  ScanInfo: {fileID: 912512697}
-  isRecode: 0
 --- !u!1 &1042922936
 GameObject:
   m_ObjectHideFlags: 0
@@ -9210,7 +9185,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -7.4, y: 192.08}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1625299358
 CanvasRenderer:
@@ -11570,7 +11545,7 @@ GameObject:
   - component: {fileID: 2062382106}
   - component: {fileID: 2062382105}
   m_Layer: 5
-  m_Name: ScaninfoTip
+  m_Name: ScanningState
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11593,7 +11568,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 50.46}
+  m_SizeDelta: {x: 0, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2062382105
 MonoBehaviour:
@@ -11615,7 +11590,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'ScanTips : StopScan'
+  m_text: Scanning State
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11650,7 +11625,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -11898,7 +11873,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 175}
+  m_AnchoredPosition: {x: 10, y: 175}
   m_SizeDelta: {x: 450, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2120055906
@@ -12140,7 +12115,7 @@ CanvasRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 679522785}
+  - {fileID: 532870205}
   - {fileID: 1683761911}
   - {fileID: 887894579}
   - {fileID: 1428460087}
