@@ -4,8 +4,8 @@ using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.Jobs;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
+using YVR.Enterprise.Camera.Samples.Utilities;
 
 namespace YVR.Enterprise.Camera.Samples.UnDistortion
 {
@@ -21,6 +21,8 @@ namespace YVR.Enterprise.Camera.Samples.UnDistortion
 
         private NativeArray<byte> m_LeftRgbDataArray = default;
         private NativeArray<byte> m_RightRgbDataArray = default;
+        private NativeArray<byte> m_LeftRotatedRgbDataArray = default;
+        private NativeArray<byte> m_RightRotatedRgbDataArray = default;
         private NativeArray<byte> m_LeftUnDistortedRgbDataArray = default;
         private NativeArray<byte> m_RightUnDistortedRgbDataArray = default;
         private Texture2D m_LeftTexture = null;
@@ -28,7 +30,7 @@ namespace YVR.Enterprise.Camera.Samples.UnDistortion
 
         public string mapLeftXFile = "map_left_x";
         public string mapLeftYFile = "map_left_y";
-        
+
         public string mapRightXFile = "map_right_x";
         public string mapRightYFile = "map_right_y";
 
@@ -47,13 +49,17 @@ namespace YVR.Enterprise.Camera.Samples.UnDistortion
             m_MapRightYDataArray = LoadLut(mapRightYFile, width * height);
 
 
-            m_LeftRgbDataArray = new NativeArray<byte>(width * height * 3, Allocator.Persistent);
-            m_LeftUnDistortedRgbDataArray = new NativeArray<byte>(width * height * 3, Allocator.Persistent);
-            m_LeftTexture = new Texture2D(width, height, TextureFormat.RGB24, false);
+            // As the image is rotated 90 degrees, the width and height are swapped
+            m_LeftTexture = new Texture2D(height, width, TextureFormat.RGB24, false);
+            m_RightTexture = new Texture2D(height, width, TextureFormat.RGB24, false);
 
+            // As the image size won't be changed, we can allocate the memory once.
+            m_LeftRgbDataArray = new NativeArray<byte>(width * height * 3, Allocator.Persistent);
             m_RightRgbDataArray = new NativeArray<byte>(width * height * 3, Allocator.Persistent);
+            m_LeftRotatedRgbDataArray = new NativeArray<byte>(width * height * 3, Allocator.Persistent);
+            m_RightRotatedRgbDataArray = new NativeArray<byte>(width * height * 3, Allocator.Persistent);
+            m_LeftUnDistortedRgbDataArray = new NativeArray<byte>(width * height * 3, Allocator.Persistent);
             m_RightUnDistortedRgbDataArray = new NativeArray<byte>(width * height * 3, Allocator.Persistent);
-            m_RightTexture = new Texture2D(width, height, TextureFormat.RGB24, false);
         }
 
         private void OnDestroy()
@@ -83,11 +89,6 @@ namespace YVR.Enterprise.Camera.Samples.UnDistortion
                 return;
             }
 
-            VSTCameraIntrinsicExtrinsicData leftIntrinsicData = default;
-            VSTCameraIntrinsicExtrinsicData rightIntrinsicData = default;
-            YVRVSTCameraPlugin.GetVSTCameraIntrinsicExtrinsic(YVREyeNumberType.LeftEye, ref leftIntrinsicData);
-            YVRVSTCameraPlugin.GetVSTCameraIntrinsicExtrinsic(YVREyeNumberType.RightEye, ref rightIntrinsicData);
-
             using NativeArray<byte> nv21NativeLeft
                 = IntPtrToNativeArray(frameData.cameraFrameItem.data[0], frameData.cameraFrameItem.dataSize);
             using NativeArray<byte> nv21NativeRight
@@ -96,28 +97,28 @@ namespace YVR.Enterprise.Camera.Samples.UnDistortion
             JobHandle leftDistortionJobHandle = GetUndistortionJob(nv21NativeLeft,
                                                                    m_LeftRgbDataArray,
                                                                    m_LeftUnDistortedRgbDataArray,
+                                                                   m_LeftRotatedRgbDataArray,
                                                                    m_MapLeftXDataArray,
                                                                    m_MapLeftYDataArray,
                                                                    frameData.cameraFrameItem.width,
-                                                                   frameData.cameraFrameItem.height,
-                                                                   leftIntrinsicData);
+                                                                   frameData.cameraFrameItem.height);
 
             JobHandle rightDistortionJobHandle = GetUndistortionJob(nv21NativeRight,
                                                                     m_RightRgbDataArray,
                                                                     m_RightUnDistortedRgbDataArray,
+                                                                    m_RightRotatedRgbDataArray,
                                                                     m_MapRightXDataArray,
                                                                     m_MapRightYDataArray,
                                                                     frameData.cameraFrameItem.width,
-                                                                    frameData.cameraFrameItem.height,
-                                                                    rightIntrinsicData);
+                                                                    frameData.cameraFrameItem.height);
 
             JobHandle combinedJobHandle = JobHandle.CombineDependencies(leftDistortionJobHandle,
                                                                         rightDistortionJobHandle);
             combinedJobHandle.Complete();
 
-            m_LeftTexture.LoadRawTextureData(m_LeftUnDistortedRgbDataArray);
+            m_LeftTexture.LoadRawTextureData(m_LeftRotatedRgbDataArray);
             m_LeftTexture.Apply();
-            m_RightTexture.LoadRawTextureData(m_RightUnDistortedRgbDataArray);
+            m_RightTexture.LoadRawTextureData(m_RightRotatedRgbDataArray);
             m_RightTexture.Apply();
 
             m_LeftImage.texture = m_LeftTexture;
@@ -127,12 +128,12 @@ namespace YVR.Enterprise.Camera.Samples.UnDistortion
         private JobHandle GetUndistortionJob(NativeArray<byte> nv21Data,
                                              NativeArray<byte> rgbData,
                                              NativeArray<byte> unDistortedData,
+                                             NativeArray<byte> rotatedRGBData,
                                              NativeArray<float> mapXData,
                                              NativeArray<float> mapYData,
-                                             int width, int height,
-                                             VSTCameraIntrinsicExtrinsicData intrinsic)
+                                             int width, int height)
         {
-            var job = new NV21ToRGBJob
+            var nv21ToRGBJob = new NV21ToRGBJob
             {
                 nv21Data = nv21Data,
                 rgbData = rgbData,
@@ -140,27 +141,31 @@ namespace YVR.Enterprise.Camera.Samples.UnDistortion
                 height = height
             };
 
-            JobHandle rgbJobHandle = job.Schedule(width * height, 256);
+            JobHandle nv21ToRGBJobHandle = nv21ToRGBJob.Schedule(width * height, 256);
 
-            intrinsic.fx = intrinsic.fx / 2640f * width;
-            intrinsic.fy = intrinsic.fy / 2464f * height;
-            intrinsic.cx = intrinsic.cx / 2640f * width;
-            intrinsic.cy = intrinsic.cy / 2464f * height;
-
-            var undistortedJob = new FisheyeUndistortJob
+            var undistortionJob = new FisheyeUndistortionJob
             {
                 srcRgb = rgbData,
                 dstRgb = unDistortedData,
                 mapX = mapXData,
                 mapY = mapYData,
-                width = width,
+                width = width, // As the image is rotated 90 degrees, the width and height are swapped
                 height = height,
-                channels = 3
             };
-            JobHandle handle = undistortedJob.Schedule(width * height, 256, rgbJobHandle);
-            handle.Complete();
+            
+            JobHandle undistortionJobHandle = undistortionJob.Schedule(width * height, 256, nv21ToRGBJobHandle);
+            
+            var rotate90CCWJob = new RotateRGB90CWJob
+            {
+                srcRgb = unDistortedData,
+                dstRgb = rotatedRGBData,
+                srcWidth = width,
+                srcHeight = height
+            };
 
-            return handle;
+            JobHandle rgbRotateCCW90JobHandle = rotate90CCWJob.Schedule(width * height, 256, undistortionJobHandle);
+
+            return rgbRotateCCW90JobHandle;
         }
 
         private static NativeArray<byte> IntPtrToNativeArray(IntPtr ptr, int length)
@@ -171,6 +176,18 @@ namespace YVR.Enterprise.Camera.Samples.UnDistortion
                      (void*) ptr, length, Allocator.None);
                 return arr;
             }
+        }
+
+        private static NativeArray<byte> IntPtrToNativeArrayCopy(IntPtr ptr, int length)
+        {
+            var arr = new NativeArray<byte>(length, Allocator.Persistent, NativeArrayOptions.UninitializedMemory);
+            unsafe
+            {
+                void* dstPtr = arr.GetUnsafePtr();
+                Buffer.MemoryCopy((void*) ptr, dstPtr, length, length);
+            }
+
+            return arr;
         }
 
         private NativeArray<float> LoadLut(string resourceName, int length)

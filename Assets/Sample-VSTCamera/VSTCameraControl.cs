@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YVR.Enterprise.Camera.Samples.Utilities;
 
 namespace YVR.Enterprise.Camera.Samples
 {

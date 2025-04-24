@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
+using YVR.Enterprise.Camera.Samples.Utilities;
 using ZXing;
 using ZXing.Common;
 using ZXing.QrCode;

@@ -3,7 +3,7 @@ using Unity.Collections;
 using Unity.Jobs;
 using UnityEngine;
 
-namespace YVR.Enterprise.Camera.Samples
+namespace YVR.Enterprise.Camera.Samples.Utilities
 {
     [BurstCompile]
     public static class ImageConversionLibrary

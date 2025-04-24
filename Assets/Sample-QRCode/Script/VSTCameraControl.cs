@@ -2,6 +2,7 @@ using System;
 using System.Buffers;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using YVR.Enterprise.Camera.Samples.Utilities;
 
 namespace YVR.Enterprise.Camera.Samples.QRCode
 {
