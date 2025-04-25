@@ -5,19 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scene/SelectSampleScene.unity
     guid: 73a478a441caeed4cbd61298e62fc4db
-  - enabled: 0
+  - enabled: 1
     path: Assets/Sample-TrackingCamera/TrackingCamera.unity
     guid: 5c1953b6660a0d245a5d00bb5b987853
-  - enabled: 0
+  - enabled: 1
     path: Assets/Sample-VSTCamera/VSTCamera.unity
     guid: 54ba820aa0c47df488688b0d4c53753a
   - enabled: 1
     path: Assets/Sample-QRCode/Scene/QRCode.unity
     guid: 20bdf0af0ce2a6d4c9fb134f6e58da0f
-  - enabled: 0
+  - enabled: 1
     path: Assets/Sample-VSTUndistortion/VSTDistortion.unity
     guid: 812b4d2a134e09149bcd5e62125d1063
   m_configObjects:

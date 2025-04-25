@@ -5744,10 +5744,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LeftImage: {fileID: 3454772375535630723}
   m_RightImage: {fileID: 6264339903762008288}
-  mapLeftXFile: map_left_x
-  mapLeftYFile: map_left_y
-  mapRightXFile: map_right_x
-  mapRightYFile: map_right_y
 --- !u!1 &943567273
 GameObject:
   m_ObjectHideFlags: 0
@@ -6666,8 +6662,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: YVR.Enterprise.Camera.Samples.VSTCameraControl,
+      - m_Target: {fileID: 940417690}
+        m_TargetAssemblyTypeName: YVR.Enterprise.Camera.Samples.UnDistortion.UndistortedVSTStreamHandler,
           Assembly-CSharp
         m_MethodName: CloseVSTCamera
         m_Mode: 1

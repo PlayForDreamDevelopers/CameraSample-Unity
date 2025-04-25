@@ -44,6 +44,7 @@ namespace YVR.Enterprise.Camera.Samples
 
         public void CloseTrackingCamera()
         {
+            if (!m_TrackingType2DisplayDict.ContainsKey(m_CameraType)) return;
             YVRTrackingCameraPlugin.CloseTrackingCamera(m_CameraType);
             Destroy(m_TrackingType2DisplayDict[m_CameraType]);
             m_TrackingType2DisplayDict.Remove(m_CameraType);

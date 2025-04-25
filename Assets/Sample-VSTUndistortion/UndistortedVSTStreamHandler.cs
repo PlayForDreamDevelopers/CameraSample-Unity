@@ -13,11 +13,7 @@ namespace YVR.Enterprise.Camera.Samples.UnDistortion
 
         private void Start()
         {
-            YVRVSTCameraPlugin.OpenVSTCamera();
-            YVRVSTCameraPlugin.SetVSTCameraFrequency(VSTCameraFrequencyType.VSTFrequency30Hz);
-            YVRVSTCameraPlugin.SetVSTCameraResolution(VSTCameraResolutionType.VSTResolution660_616);
-            YVRVSTCameraPlugin.SetVSTCameraFormat(VSTCameraFormatType.VSTCameraFmtNv21);
-            YVRVSTCameraPlugin.SetVSTCameraOutputSource(VSTCameraSourceType.VSTCameraBothEyes);
+            OpenVSTCamera();
 
             int width = 660, height = 616; // Hard Code here
             m_UndistortionTextureWrapper = new UndistortionTextureWrapper(width, height, "map_left_x", "map_left_y",
@@ -35,6 +31,19 @@ namespace YVR.Enterprise.Camera.Samples.UnDistortion
             m_UndistortionTextureWrapper.RefreshTexture(frameData);
             m_LeftImage.texture = m_UndistortionTextureWrapper.leftTexture;
             m_RightImage.texture = m_UndistortionTextureWrapper.rightTexture;
+        }
+
+        public void OpenVSTCamera()
+        {
+            YVRVSTCameraPlugin.OpenVSTCamera();
+            YVRVSTCameraPlugin.SetVSTCameraFrequency(VSTCameraFrequencyType.VSTFrequency30Hz);
+            YVRVSTCameraPlugin.SetVSTCameraResolution(VSTCameraResolutionType.VSTResolution660_616);
+            YVRVSTCameraPlugin.SetVSTCameraFormat(VSTCameraFormatType.VSTCameraFmtNv21);
+            YVRVSTCameraPlugin.SetVSTCameraOutputSource(VSTCameraSourceType.VSTCameraBothEyes);
+        }
+        public void CloseVSTCamera()
+        {
+            YVRVSTCameraPlugin.CloseVSTCamera();
         }
     }
 }

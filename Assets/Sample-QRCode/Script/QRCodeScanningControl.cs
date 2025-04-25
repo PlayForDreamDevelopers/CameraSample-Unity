@@ -84,6 +84,8 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
         public void CloseVSTCamera()
         {
             YVRVSTCameraPlugin.CloseVSTCamera();
+            if(!m_VSTCameraOpened)
+                return;
             qrCodeInfoDisplay.RefreshScanningState(false);
             m_QRScanCancel.Cancel();
             lock (m_VSTStateLock)
