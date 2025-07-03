@@ -283,21 +283,21 @@
       "hash": "9e5e0f60d2546570596dc3dcab47051819329217"
     },
     "com.yvr.core": {
-      "version": "https://github.com/PlayForDreamDevelopers/com.yvr.core-mirror.git?path=/com.yvr.core#version_1.26.3",
+      "version": "https://github.com/PlayForDreamDevelopers/com.yvr.core-mirror.git?path=/com.yvr.core#version_1.28.11",
       "depth": 0,
       "source": "git",
       "dependencies": {
-        "com.yvr.utilities": "0.15.10",
+        "com.yvr.utilities": "0.15.14",
         "com.unity.xr.management": "3.0.4"
       },
-      "hash": "6354dc4faea4f4da59756a4d376f098334c3ae15"
+      "hash": "9213457a70467b85a8d81aba964416f92c462cf9"
     },
     "com.yvr.enterprise": {
-      "version": "https://github.com/PlayForDreamDevelopers/com.yvr.enterprise-mirror.git?path=/com.yvr.enterprise#version_0.1.6",
+      "version": "https://github.com/PlayForDreamDevelopers/com.yvr.enterprise-mirror.git?path=/com.yvr.enterprise#version_0.1.5",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "7fb105d5f476fd92a90cef44033b1b4d91e2ce78"
+      "hash": "aadd6202e26ce038a39c79b1ffca869c02afebc3"
     },
     "com.yvr.interaction": {
       "version": "https://github.com/PlayForDreamDevelopers/com.yvr.interaction-mirror.git?path=/com.yvr.interaction#version_0.6.28",
@@ -312,13 +312,13 @@
       "hash": "bcecb95c5b3568bbb396bc1aa4f3a2d24d375bad"
     },
     "com.yvr.utilities": {
-      "version": "https://github.com/PlayForDreamDevelopers/com.yvr.utilities-mirror.git?path=/com.yvr.utilities#version_0.15.12",
+      "version": "https://github.com/PlayForDreamDevelopers/com.yvr.utilities-mirror.git?path=/com.yvr.utilities#version_0.15.14",
       "depth": 0,
       "source": "git",
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "3.2.1"
       },
-      "hash": "7a53095f37af3bb96c8d64af7a7d41711113282e"
+      "hash": "5509e064b2fdf7b7f1963bc1b65b8367a22d4229"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
