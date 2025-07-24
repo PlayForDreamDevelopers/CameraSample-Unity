@@ -293,11 +293,11 @@
       "hash": "9213457a70467b85a8d81aba964416f92c462cf9"
     },
     "com.yvr.enterprise": {
-      "version": "https://github.com/PlayForDreamDevelopers/com.yvr.enterprise-mirror.git?path=/com.yvr.enterprise#version_0.1.5",
+      "version": "https://github.com/PlayForDreamDevelopers/com.yvr.enterprise-mirror.git?path=/com.yvr.enterprise#version_0.1.7",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "aadd6202e26ce038a39c79b1ffca869c02afebc3"
+      "hash": "3bc5e894dd0b7b3f4a634647d5040f3fdb6c75ef"
     },
     "com.yvr.interaction": {
       "version": "https://github.com/PlayForDreamDevelopers/com.yvr.interaction-mirror.git?path=/com.yvr.interaction#version_0.6.28",
