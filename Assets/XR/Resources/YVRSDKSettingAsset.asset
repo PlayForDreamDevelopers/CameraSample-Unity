@@ -29,30 +29,8 @@ MonoBehaviour:
     attrValue: yvr.sdk.version
     attrs:
     - value
-    - Unity_android-device.core_1.2.2|Unity_core_1.23.10|Unity_enterprise_0.0.9|Unity_interaction_0.6.28|Unity_utilities_0.15.11
+    - Unity_android-device.core_1.2.4|Unity_core_1.28.11|Unity_enterprise_0.1.8|Unity_interaction_0.6.28|Unity_utilities_0.15.14
     required: 1
-  - nodePath: /manifest
-    tag: uses-feature
-    attrName: name
-    attrValue: yvr.software.quadviews
-    attrs:
-    - required
-    - false
-    required: 0
-  - nodePath: /manifest/application
-    tag: meta-data
-    attrName: name
-    attrValue: com.yvr.ossplash
-    attrs:
-    - value
-    - false
-    required: 1
-  - nodePath: /manifest
-    tag: uses-permission
-    attrName: name
-    attrValue: com.yvr.permission.USE_SCENE
-    attrs: []
-    required: 0
   - nodePath: /manifest
     tag: uses-feature
     attrName: name
@@ -64,11 +42,25 @@ MonoBehaviour:
     - true
     required: 1
   - nodePath: /manifest
+    tag: uses-feature
+    attrName: name
+    attrValue: yvr.software.quadviews
+    attrs:
+    - required
+    - false
+    required: 0
+  - nodePath: /manifest
     tag: uses-permission
     attrName: name
-    attrValue: com.yvr.permission.USE_ANCHOR_API
+    attrValue: com.yvr.permission.USE_SCENE
     attrs: []
     required: 0
+  - nodePath: /manifest/application/activity/intent-filter
+    tag: category
+    attrName: name
+    attrValue: org.khronos.openxr.intent.category.IMMERSIVE_HMD
+    attrs: []
+    required: 1
   - nodePath: /manifest
     tag: uses-permission
     attrName: name
@@ -113,12 +105,6 @@ MonoBehaviour:
     - required
     - false
     required: 0
-  - nodePath: /manifest/application/activity/intent-filter
-    tag: category
-    attrName: name
-    attrValue: org.khronos.openxr.intent.category.IMMERSIVE_HMD
-    attrs: []
-    required: 1
   - nodePath: /manifest
     tag: uses-feature
     attrName: name
@@ -140,6 +126,20 @@ MonoBehaviour:
     attrs:
     - required
     - false
+    required: 0
+  - nodePath: /manifest/application
+    tag: meta-data
+    attrName: name
+    attrValue: com.yvr.ossplash
+    attrs:
+    - value
+    - false
+    required: 1
+  - nodePath: /manifest
+    tag: uses-permission
+    attrName: name
+    attrValue: com.yvr.permission.USE_ANCHOR_API
+    attrs: []
     required: 0
   packingAssetInfoList: []
   toDeletePackingAssetList: []
