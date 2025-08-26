@@ -16,23 +16,24 @@ namespace YVR.Enterprise.Camera.Samples.Utilities
         private UndistortionMap m_LeftUndistortionMap = null;
         private UndistortionMap m_RightUndistortionMap = null;
 
-        public UndistortionTextureWrapper(int width, int height, string leftMapXFile, string leftMapYFile,
-                                          string rightMapXFile, string rightMapYFile)
+        public UndistortionTextureWrapper(int width, int height)
         {
             // As the image is rotated 90 degrees, the width and height of image are swapped
 
             leftNV21DataConverter = new NV21DataConverter(660, 616);
-            m_LeftUndistortionMap = new UndistortionMap(660, 616, leftMapXFile, leftMapYFile);
+            m_LeftUndistortionMap = new UndistortionMap(VSTCameraSourceType.VSTCameraLeftEye,
+                                                        VSTCameraResolutionType.VSTResolution660_616);
             leftTexture = new Texture2D(height, width, TextureFormat.RGB24, false);
 
             rightNV21DataConverter = new NV21DataConverter(660, 616);
-            m_RightUndistortionMap = new UndistortionMap(660, 616, rightMapXFile, rightMapYFile);
+            m_RightUndistortionMap = new UndistortionMap(VSTCameraSourceType.VSTCameraRightEye,
+                                                        VSTCameraResolutionType.VSTResolution660_616);
+
             rightTexture = new Texture2D(height, width, TextureFormat.RGB24, false);
         }
 
         public void RefreshTexture(VSTCameraFrameData frameData)
         {
-
             if (frameData.cameraFrameItem.data[0] == IntPtr.Zero || frameData.cameraFrameItem.data[1] == IntPtr.Zero)
             {
                 return;

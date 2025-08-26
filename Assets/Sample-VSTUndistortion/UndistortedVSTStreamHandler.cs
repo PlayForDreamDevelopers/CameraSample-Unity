@@ -16,8 +16,7 @@ namespace YVR.Enterprise.Camera.Samples.UnDistortion
             OpenVSTCamera();
 
             int width = 660, height = 616; // Hard Code here
-            m_UndistortionTextureWrapper = new UndistortionTextureWrapper(width, height, "map_left_x", "map_left_y",
-                                                                          "map_right_x", "map_right_y");
+            m_UndistortionTextureWrapper = new UndistortionTextureWrapper(width, height);
         }
 
         private void Update()

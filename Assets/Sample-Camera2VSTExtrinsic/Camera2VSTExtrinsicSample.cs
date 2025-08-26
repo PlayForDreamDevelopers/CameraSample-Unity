@@ -15,8 +15,8 @@ namespace YVR.Enterprise.Camera.Samples.QRCode
 
             VSTCameraExtrinsicData camera2LeftVST = default;
             VSTCameraExtrinsicData camera2RightVST = default;
-            YVRVSTCameraPlugin.GetEyeCenterToVSTCameraExtrinsic(YVREyeNumberType.LeftEye, ref camera2LeftVST);
-            YVRVSTCameraPlugin.GetEyeCenterToVSTCameraExtrinsic(YVREyeNumberType.RightEye, ref camera2RightVST);
+            YVRVSTCameraPlugin.GetEyeCenterToVSTCameraExtrinsic(VSTCameraSourceType.VSTCameraLeftEye, ref camera2LeftVST);
+            YVRVSTCameraPlugin.GetEyeCenterToVSTCameraExtrinsic(VSTCameraSourceType.VSTCameraRightEye, ref camera2RightVST);
 
             var headInputDevice = new List<InputDevice>();
             var headCharacteristics = InputDeviceCharacteristics.HeadMounted;

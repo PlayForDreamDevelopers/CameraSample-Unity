@@ -79,7 +79,7 @@ namespace YVR.Enterprise.Camera.Samples
             YVRVSTCameraPlugin.GetVSTCameraResolution(ref resolution);
             YVRVSTCameraPlugin.GetVSTCameraFormat(ref formatType);
             YVRVSTCameraPlugin.GetVSTCameraOutputSource(ref sourceType);
-            YVRVSTCameraPlugin.GetVSTCameraIntrinsicExtrinsic(YVREyeNumberType.LeftEye, ref data);
+            YVRVSTCameraPlugin.GetVSTCameraIntrinsicExtrinsic(VSTCameraSourceType.VSTCameraLeftEye, ref data);
 
             string text = $"Frequency: {freqType}\n" +
                           $"Resolution: {resolution}\n" +
